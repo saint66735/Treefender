@@ -210,6 +210,7 @@ namespace UnityTemplateProjects
             if (IsBoostPressed())
             {
                 translation *= 10.0f;
+
             }
 
             // Modify movement by a boost factor (defined in Inspector and modified in play mode through the mouse scroll wheel)
