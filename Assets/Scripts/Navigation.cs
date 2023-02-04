@@ -16,7 +16,7 @@ public class Navigation : MonoBehaviour
 
     private void Start()
     {
-        _currentPosition = new Vector3(-2.5f, 8.5f, 0);
+        _currentPosition = new Vector3(-2.5f, 0.5f, 0);
         Instantiate(treeRoot, _currentPosition, Quaternion.identity);
     }
 
