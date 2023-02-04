@@ -24,6 +24,78 @@ namespace UnityTemplateProjects
             return rootDirection.Up;
         }
 
+        public static Quaternion GetQuaternionFromDirection(rootDirection facing, rootDirection turn)
+        {
+            switch (facing)
+            {
+                case rootDirection.Down:
+                {
+                    switch (turn)
+                    {
+                        case rootDirection.Left:
+                        {
+                            return Quaternion.Euler(0, 0, 90f);
+                        }
+                        case rootDirection.Right:
+                        {
+                            return Quaternion.Euler(0, 0, -180f);
+                        }
+                    }
+                    break;
+                }
+                case rootDirection.Left:
+                {
+                    switch (turn)
+                    {
+                        case rootDirection.Right:
+                        {
+                            return Quaternion.Euler(0, 0, 90f);
+                        }
+                        case rootDirection.Down:
+                        case rootDirection.Up:
+                        {
+                            return Quaternion.Euler(0, 0, 90f);
+                        }    
+                    }
+                    break;
+                }
+                case rootDirection.Right:
+                {
+                    switch (turn)
+                    {
+                        case rootDirection.Left:
+                        {
+                            return Quaternion.Euler(0, 0, -180f);
+                        }
+                        case rootDirection.Right:
+                        {
+                            return Quaternion.Euler(0, 0, -90f);
+                        }
+                        case rootDirection.Down:
+                        case rootDirection.Up:
+                        {
+                            return Quaternion.Euler(0, 0, -90f);
+                        }    
+                    }
+
+                    break;
+                }
+                case rootDirection.Up:
+                {
+                    switch (turn)
+                    {
+                        case rootDirection.Left:
+                        {
+                            return Quaternion.Euler(0, 0, -90f);
+                        }
+                    }
+                    break;
+                }
+            }
+
+            return Quaternion.identity;
+        }
+
         public static rootDirection GetTurnDirection(rootDirection facing, Vector3 currentPoint, Vector3 newPoint)
         {
             switch (facing)

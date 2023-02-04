@@ -48,22 +48,27 @@ public class Navigation : MonoBehaviour
                     
                     _facingDirection = Direction.GetFacingDirection(_currentPosition, newPosition);
                     
+                    Debug.Log(turnDirection);
+                    Debug.Log(_facingDirection);
+
+                    Quaternion q = Direction.GetQuaternionFromDirection(_facingDirection, turnDirection);
+                    
                     switch (turnDirection)
                     {
                         case Direction.rootDirection.Down:
                         case Direction.rootDirection.Up:
                         {
-                            Instantiate(treeRoot, _currentPosition, Quaternion.identity);
+                            Instantiate(treeRoot, _currentPosition, q);
                             break;
                         }
                         case Direction.rootDirection.Right:
                         {
-                            Instantiate(turnRight, _currentPosition, Quaternion.identity);
+                            Instantiate(turnRight, _currentPosition, q);
                             break;
                         }
                         case Direction.rootDirection.Left:
                         {
-                            Instantiate(turnLeft, _currentPosition, Quaternion.identity);
+                            Instantiate(turnLeft, _currentPosition, q);
                             break;
                         }
                     }
