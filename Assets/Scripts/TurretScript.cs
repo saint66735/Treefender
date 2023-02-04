@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class TurretScript : MonoBehaviour
 {
@@ -16,6 +17,9 @@ public class TurretScript : MonoBehaviour
     float time = 0;
     public Animator animator;
     public Transform body;
+    public VisualEffect flash1;
+    public VisualEffect flash2;
+    bool whichGun = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -50,6 +54,16 @@ public class TurretScript : MonoBehaviour
             temp.GetComponent<ProjectileScript>().Setup(damage);
             time = Time.time + delay;
             animator.Play("Armature|Shoot");
+            if(whichGun)
+            {
+                flash1.SendEvent("OnPlay");
+                whichGun = false;
+            }
+            else
+            {
+                flash2.SendEvent("OnPlay");
+                whichGun = true;
+            }
         }
     }
     Transform ChooseTarget(RaycastHit[] hits)
