@@ -16,7 +16,7 @@ public class Navigation : MonoBehaviour
 
     private void Start()
     {
-        _currentPosition = new Vector3(-2.5f, 0.5f, 0);
+        _currentPosition = new Vector3(0.5f, -0.5f, 0);
         Instantiate(treeRoot, _currentPosition, Quaternion.identity);
     }
 
@@ -37,7 +37,7 @@ public class Navigation : MonoBehaviour
                     Destroy(clickedObject);
                     _currentPosition = newPosition;
                     Instantiate(treeRoot, _currentPosition, Quaternion.identity);
-                    Debug.Log(Currency.GetCurrency());
+                    /*Debug.Log(Currency.GetCurrency());*/
                 }
             }
         }

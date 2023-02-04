@@ -1,26 +1,22 @@
 using UnityEditor.AnimatedValues;
 using UnityEngine;
 
-namespace UnityTemplateProjects
+
+public class Value : MonoBehaviour
 {
-    public class Value : MonoBehaviour
+    [SerializeField] private int baseValue;
+
+    [SerializeField] private float scaling;
+
+    private int _value;
+
+    private void Start()
     {
-        [SerializeField] 
-        private int baseValue;
+        _value = (int)(transform.position.y * -1 * scaling) + baseValue;
+    }
 
-        [SerializeField] 
-        private float scaling;
-
-        private int _value;
-
-        private void Start()
-        {
-            _value = (int)(transform.position.y * -1 * scaling) + baseValue;
-        }
-
-        public void Liquidate()
-        {
-            Currency.AddCurrency(_value);
-        }
+    public void Liquidate()
+    {
+        Currency.AddCurrency(_value);
     }
 }
