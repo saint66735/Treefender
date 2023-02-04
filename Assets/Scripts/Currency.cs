@@ -1,3 +1,4 @@
+
 public class Currency
 {
     public static int currencyOwned;

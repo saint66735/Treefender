@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class Value : MonoBehaviour
 {
-    [SerializeField]
-    private int baseValue;
+    [SerializeField] private int baseValue;
 
-    [SerializeField]
-    private float scaling;
+    [SerializeField] private float scaling;
 
     private int _value;
 
