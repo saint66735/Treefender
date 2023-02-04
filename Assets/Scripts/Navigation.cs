@@ -31,8 +31,9 @@ public class Navigation : MonoBehaviour
                 GameObject clickedObject = hit.transform.GameObject();
                 Vector3 newPosition = clickedObject.transform.position;
 
-                if (!clickedObject.CompareTag("Root") && Vector3.Distance(_currentPosition, newPosition) == 1)
+                if (MinePower.CanMine() && !clickedObject.CompareTag("Root") && Vector3.Distance(_currentPosition, newPosition) == 1)
                 {   
+                    MinePower.Mine();
                     clickedObject.GetComponent<Value>().Liquidate();
                     Destroy(clickedObject);
                     _currentPosition = newPosition;

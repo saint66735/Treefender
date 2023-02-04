@@ -14,6 +14,8 @@ public class WaveManager : MonoBehaviour
     float buttonDelay = 1f;
     float buttonAppears = 0;
     Vector3 enemyStats = new Vector3(100, 10, 2);
+
+    private bool combat = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,9 +25,11 @@ public class WaveManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentEnemyCount==0&&buttonAppears<Time.time)
+        if (combat && currentEnemyCount == 0 && buttonAppears < Time.time)
         {
+            combat = false;
             button.SetActive(true);
+            MinePower.ResetMinePower();
         }
     }
     public void OnStartNewWave()
@@ -34,6 +38,7 @@ public class WaveManager : MonoBehaviour
         enemyCount += waveNumber;
         spawnDelay *= 0.95f;
         StartCoroutine(Spawn());
+        combat = true;
         button.SetActive(false);
         enemyStats *= 1.05f;
         buttonAppears = Time.time + buttonDelay;

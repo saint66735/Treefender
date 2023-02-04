@@ -811,6 +811,8 @@ GameObject:
   - component: {fileID: 123879393}
   - component: {fileID: 123879394}
   - component: {fileID: 123879395}
+  - component: {fileID: 123879396}
+  - component: {fileID: 123879397}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -862,6 +864,32 @@ MonoBehaviour:
   rareDirt: {fileID: 3659223799845553248, guid: 5120db89578779ef480d53fbca0a47b5, type: 3}
   rowCount: 10
   columnCount: 35
+--- !u!114 &123879396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123879391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f348b84ff4c44f7787113a383f119647, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseMinePower: 5
+--- !u!114 &123879397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 123879391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f81121e8e0614b5ba70609db21697c52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startingCurrency: 5
 --- !u!1001 &126576411
 PrefabInstance:
   m_ObjectHideFlags: 0

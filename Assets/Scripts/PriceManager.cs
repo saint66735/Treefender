@@ -23,7 +23,7 @@ public class PriceManager : MonoBehaviour
     }
     public bool CheckIfAffordableTurret()
     {
-        if (Currency.currencyOwned > TurretPrice) { return true; }
+        if (Currency.GetCurrency() > TurretPrice) { return true; }
         else { return false; }
     }
     public void OnPurchased() 

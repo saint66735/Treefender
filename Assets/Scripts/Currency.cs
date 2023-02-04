@@ -1,7 +1,19 @@
+using System;
+using System.Linq;
+using System.Security.Cryptography;
+using UnityEngine;
 
-public class Currency
+public class Currency : MonoBehaviour
 {
-    public static int currencyOwned;
+
+    [SerializeField] private int startingCurrency;
+    
+    private static int currencyOwned;
+
+    private void Start()
+    {
+        currencyOwned = startingCurrency;
+    }
 
     public static void SetCurrency(int amount)
     {
