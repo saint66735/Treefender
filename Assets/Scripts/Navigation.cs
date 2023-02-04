@@ -17,7 +17,7 @@ public class Navigation : MonoBehaviour
     private Vector3 _currentPosition;
     private GameObject _currentObject;
 
-    private Direction.rootDirection _facingDirection;
+    private Direction.RootDirection _facingDirection;
 
     private void Start()
     {
@@ -43,38 +43,50 @@ public class Navigation : MonoBehaviour
                     Destroy(clickedObject);
                     Destroy(_currentObject);
                     
-                    Direction.rootDirection turnDirection =
+                    Direction.RootDirection turnDirection =
                         Direction.GetTurnDirection(_facingDirection, _currentPosition, newPosition);
                     
                     _facingDirection = Direction.GetFacingDirection(_currentPosition, newPosition);
                     
-                    Debug.Log(turnDirection);
-                    Debug.Log(_facingDirection);
+                    // Debug.Log(turnDirection);
+                    // Debug.Log(_facingDirection);
 
-                    Quaternion q = Direction.GetQuaternionFromDirection(_facingDirection, turnDirection);
-                    
+                    float z = Direction.GetRotation(_facingDirection, turnDirection);
+
+
                     switch (turnDirection)
                     {
-                        case Direction.rootDirection.Down:
-                        case Direction.rootDirection.Up:
+                        case Direction.RootDirection.Down:
+                        case Direction.RootDirection.Up:
                         {
-                            Instantiate(treeRoot, _currentPosition, q);
+                            GameObject rootBlock = Instantiate(treeRoot, _currentPosition, Quaternion.identity);
+                            rootBlock.transform.GetChild(0).transform.Rotate(0, 0, z, Space.World);
                             break;
                         }
-                        case Direction.rootDirection.Right:
+                        case Direction.RootDirection.Right:
                         {
-                            Instantiate(turnRight, _currentPosition, q);
+                            GameObject rootBlock = Instantiate(turnRight, _currentPosition, Quaternion.identity);
+                            rootBlock.transform.GetChild(0).transform.Rotate(0, 0, z, Space.World);
                             break;
                         }
-                        case Direction.rootDirection.Left:
+                        case Direction.RootDirection.Left:
                         {
-                            Instantiate(turnLeft, _currentPosition, q);
+                            GameObject rootBlock = Instantiate(turnLeft, _currentPosition, Quaternion.identity);
+                            rootBlock.transform.GetChild(0).transform.Rotate(0, 0, z, Space.World);
                             break;
                         }
                     }
-                    
+
                     _currentPosition = newPosition;
                     _currentObject = Instantiate(rootEnd, _currentPosition, Quaternion.identity);
+                    z = _facingDirection switch
+                    {
+                        Direction.RootDirection.Left => -90f,
+                        Direction.RootDirection.Right => 90f,
+                        Direction.RootDirection.Up => -180f,
+                        _ => 0,
+                    };
+                    _currentObject.transform.GetChild(0).transform.Rotate(0, 0, z, Space.World);
                     /*Debug.Log(Currency.GetCurrency());*/
                 }
             }
