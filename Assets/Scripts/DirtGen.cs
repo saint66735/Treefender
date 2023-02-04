@@ -16,8 +16,8 @@ public class DirtGen : MonoBehaviour
     private void Start()
     {
         int totalBlocks = rowCount * columnCount;
-        Vector3 startCoords = new Vector3(-11.5f, -5.5f, 0);
-        Vector3 currentCoords = new Vector3(-11.5f, -5.5f, 0);
+        Vector3 startCoords = new Vector3(-17.5f, -5.5f, 0);
+        Vector3 currentCoords = new Vector3(-17.5f, -5.5f, 0);
         dirtQ = Enumerable.Repeat(0, totalBlocks).Select(i => Random.Range(0, 20)).ToArray();
         for (int i = 0; i < totalBlocks; i++)
         {
