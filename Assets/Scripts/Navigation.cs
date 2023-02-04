@@ -9,15 +9,18 @@ using UnityTemplateProjects;
 
 public class Navigation : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject treeRoot;
+    [SerializeField] private GameObject treeRoot;
+    [SerializeField] private GameObject rootEnd;
+    [SerializeField] private GameObject turnLeft;
+    [SerializeField] private GameObject turnRight;
 
     private Vector3 _currentPosition;
+    private GameObject _currentObject;
 
     private void Start()
     {
         _currentPosition = new Vector3(0.5f, -0.5f, 0);
-        Instantiate(treeRoot, _currentPosition, Quaternion.identity);
+        _currentObject = Instantiate(rootEnd, _currentPosition, Quaternion.identity);
     }
 
     private void Update()
@@ -36,8 +39,10 @@ public class Navigation : MonoBehaviour
                     MinePower.Mine();
                     clickedObject.GetComponent<Value>().Liquidate();
                     Destroy(clickedObject);
-                    _currentPosition = newPosition;
+                    Destroy(_currentObject);
                     Instantiate(treeRoot, _currentPosition, Quaternion.identity);
+                    _currentPosition = newPosition;
+                    _currentObject = Instantiate(rootEnd, _currentPosition, Quaternion.identity);
                     /*Debug.Log(Currency.GetCurrency());*/
                 }
             }
