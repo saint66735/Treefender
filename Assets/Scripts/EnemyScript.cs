@@ -9,10 +9,17 @@ public class EnemyScript : MonoBehaviour
     public float speed = 2;
     bool type = false; // false == ground
     WaveManager waves;
+    public GameObject deathEffect;
+    public Transform body;
     // Start is called before the first frame update
     void Start()
     {
         waves = FindObjectOfType<WaveManager>();
+        if (transform.position.x > 0)
+        {
+            Quaternion newRot = Quaternion.Euler(new Vector3(body.rotation.x, -90, body.rotation.z));
+            body.rotation = newRot;
+        }
     }
 
     // Update is called once per frame
@@ -20,8 +27,7 @@ public class EnemyScript : MonoBehaviour
     {
         if (health <= 0)
         {
-            Destroy(gameObject);
-            waves.DecreaseEnemyCount();
+            Die();
         }
         if (!type)
         {
@@ -52,11 +58,17 @@ public class EnemyScript : MonoBehaviour
         if (collision.transform.CompareTag("Player"))
         {
             collision.transform.GetComponent<PlayerScript>().TakeDamage(damage);
-            Destroy(gameObject);
+            Die();
         }
     }
     public void TakeDamage(float damage)
     {
         health -= damage;
+    }
+    void Die()
+    {
+        waves.DecreaseEnemyCount();
+        Instantiate(deathEffect, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }

@@ -14,6 +14,8 @@ public class TurretScript : MonoBehaviour
     public Transform muzzle;
     Transform target;
     float time = 0;
+    public Animator animator;
+    public Transform body;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,20 +26,30 @@ public class TurretScript : MonoBehaviour
     void Update()
     {
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, range, Vector3.down, range);
-        target = ChooseTarget(hits);
-        barrel.LookAt(target, Vector3.up);
-        if (target != null)
-            Shoot();
+        if(hits !=null)
+        {
+            target = ChooseTarget(hits);
+            if (target != null)
+            {
+                barrel.LookAt(target, Vector3.up);
+                Shoot();
+            }
+        }
+        if(target==null)
+        {
+            animator.Play("Armature|Idle");
+        }
     }
 
     void Shoot()
     {
         if (time < Time.time)
         {
-            GameObject temp = Instantiate(projectile,muzzle.position,muzzle.rotation);
+            GameObject temp = Instantiate(projectile, muzzle.position, muzzle.rotation);
             temp.GetComponent<Rigidbody>().AddForce(temp.transform.forward * projectileSpeed, ForceMode.VelocityChange);
             temp.GetComponent<ProjectileScript>().Setup(damage);
             time = Time.time + delay;
+            animator.Play("Armature|Shoot");
         }
     }
     Transform ChooseTarget(RaycastHit[] hits)
@@ -51,17 +63,35 @@ public class TurretScript : MonoBehaviour
                 possibleTargets.Add(hits[i].transform);
             }
         }
-        foreach (Transform possibleTarget in possibleTargets)
+        if(possibleTargets !=null)
         {
-            if (target == null)
+            foreach (Transform possibleTarget in possibleTargets)
             {
-                target = possibleTarget;
+                if (target == null)
+                {
+                    target = possibleTarget;
+                }
+                if (Vector3.Distance(transform.position, target.position) > Vector3.Distance(transform.position, possibleTarget.position))
+                {
+                    target = possibleTarget;
+                }
             }
-            if (Vector3.Distance(transform.position, target.position) > Vector3.Distance(transform.position, possibleTarget.position))
+            if(target!=null)
             {
-                target = possibleTarget;
+                if (target.position.x < 0)
+                {
+                    Quaternion newRot = Quaternion.Euler(body.rotation.x, 270, body.rotation.z);
+                    body.rotation = newRot;
+                }
+                else
+                {
+                    Quaternion newRot = Quaternion.Euler(body.rotation.x, 90, body.rotation.z);
+                    body.rotation = newRot;
+                }
             }
+            
         }
+        
         return target;
     }
     public void UpgradeRange()
