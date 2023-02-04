@@ -17,6 +17,8 @@ public class Navigation : MonoBehaviour
     private Vector3 _currentPosition;
     private GameObject _currentObject;
 
+    private Direction.rootDirection _facingDirection;
+
     private void Start()
     {
         _currentPosition = new Vector3(0.5f, -0.5f, 0);
@@ -40,7 +42,32 @@ public class Navigation : MonoBehaviour
                     clickedObject.GetComponent<Value>().Liquidate();
                     Destroy(clickedObject);
                     Destroy(_currentObject);
-                    Instantiate(treeRoot, _currentPosition, Quaternion.identity);
+                    
+                    Direction.rootDirection turnDirection =
+                        Direction.GetTurnDirection(_facingDirection, _currentPosition, newPosition);
+                    
+                    _facingDirection = Direction.GetFacingDirection(_currentPosition, newPosition);
+                    
+                    switch (turnDirection)
+                    {
+                        case Direction.rootDirection.Down:
+                        case Direction.rootDirection.Up:
+                        {
+                            Instantiate(treeRoot, _currentPosition, Quaternion.identity);
+                            break;
+                        }
+                        case Direction.rootDirection.Right:
+                        {
+                            Instantiate(turnRight, _currentPosition, Quaternion.identity);
+                            break;
+                        }
+                        case Direction.rootDirection.Left:
+                        {
+                            Instantiate(turnLeft, _currentPosition, Quaternion.identity);
+                            break;
+                        }
+                    }
+                    
                     _currentPosition = newPosition;
                     _currentObject = Instantiate(rootEnd, _currentPosition, Quaternion.identity);
                     /*Debug.Log(Currency.GetCurrency());*/
