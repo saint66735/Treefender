@@ -3,19 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.Serialization;
+using UnityTemplateProjects;
 
 public class Navigation : MonoBehaviour
 {
     [SerializeField]
-    private GameObject root;
+    private GameObject treeRoot;
 
     private Vector3 _currentPosition;
 
     private void Start()
     {
         _currentPosition = new Vector3(-2.5f, 8.5f, 0);
-        Instantiate(root, _currentPosition, Quaternion.identity);
+        Instantiate(treeRoot, _currentPosition, Quaternion.identity);
     }
 
     private void Update()
@@ -28,11 +30,14 @@ public class Navigation : MonoBehaviour
             {
                 GameObject clickedObject = hit.transform.GameObject();
                 Vector3 newPosition = clickedObject.transform.position;
-                if (!gameObject.CompareTag("Root") && Vector3.Distance(_currentPosition, newPosition) == 1)
-                {
-                    Destroy(gameObject);
+
+                if (!clickedObject.CompareTag("Root") && Vector3.Distance(_currentPosition, newPosition) == 1)
+                {   
+                    clickedObject.GetComponent<Value>().Liquidate();
+                    Destroy(clickedObject);
                     _currentPosition = newPosition;
-                    Instantiate(root, _currentPosition, Quaternion.identity);
+                    Instantiate(treeRoot, _currentPosition, Quaternion.identity);
+                    Debug.Log(Currency.GetCurrency());
                 }
             }
         }
