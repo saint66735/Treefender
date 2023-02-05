@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         coins.text = "" + Currency.GetCurrency();
-        newTurretCost.text = "New turret costs: " + priceM.TurretPrice;
+        newTurretCost.text = "" + priceM.TurretPrice;
         newUpgradeCost.text = "Upgrade costs: " + priceM.upgradePrice;
         digsRemaining.text = "" + MinePower.currentMinePower;
         hpText.text = "" + player.health;
