@@ -8,6 +8,7 @@ public class UIManager : MonoBehaviour
     public TextMeshProUGUI coins;
     public TextMeshProUGUI waveCount;
     public TextMeshProUGUI newTurretCost;
+    public TextMeshProUGUI newUpgradeCost;
     public TextMeshProUGUI digsRemaining;
     public TextMeshProUGUI hpText;
     public WaveManager wavesM;
@@ -27,7 +28,8 @@ public class UIManager : MonoBehaviour
     {
         coins.text = "" + Currency.GetCurrency();
         newTurretCost.text = "New turret costs: " + priceM.TurretPrice;
-        digsRemaining.text = "Digs remaining: " + MinePower.currentMinePower;
+        newUpgradeCost.text = "Upgrade costs: " + priceM.upgradePrice;
+        digsRemaining.text = "" + MinePower.currentMinePower;
         hpText.text = "" + player.health;
     }
     public void UpdateWave(float wave)
@@ -81,7 +83,9 @@ public class UIManager : MonoBehaviour
     {
         if (priceM.CheckIfAffordableUpgrade())
         {
-
+            MinePower.UpgradeMinePower(1);
+            priceM.OnPurchasedUpgrade();
+            priceM.IncreaseUpgradeCost();
         }
         else
         {

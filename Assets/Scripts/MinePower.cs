@@ -16,7 +16,7 @@ public class MinePower : MonoBehaviour
     public static void UpgradeMinePower(int amount)
     {
         maxMinePower += amount;
-        currentMinePower = maxMinePower;
+        currentMinePower++;
     }
 
     public static bool CanMine()

@@ -11,6 +11,8 @@ public class DirtGen : MonoBehaviour
     [SerializeField] private GameObject rareDirt;
     [SerializeField] private int rowCount;
     [SerializeField] private int columnCount;
+    [SerializeField]
+    Transform parent;
 
     private int[] dirtQ;
     private void Start()
@@ -28,11 +30,11 @@ public class DirtGen : MonoBehaviour
             }
             if (dirtQ[i] > 15)
             {
-                Instantiate(rareDirt, currentCoords, Quaternion.identity);
+                Instantiate(rareDirt, currentCoords, Quaternion.identity, parent);
             }
             else
             {
-                Instantiate(normalDirt, currentCoords, Quaternion.identity);
+                Instantiate(normalDirt, currentCoords, Quaternion.identity, parent);
             }
             currentCoords += Vector3.right;
         }
