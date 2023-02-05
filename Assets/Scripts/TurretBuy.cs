@@ -18,8 +18,10 @@ public class TurretBuy : MonoBehaviour
         if(manager.CheckIfAffordableTurret())
         {
             Instantiate(turretObject, turretSpawn);
+            //Debug.Log(manager.TurretPrice);
+            manager.OnPurchasedTurret();
+            manager.IncreaseTurretCost();
             Destroy(gameObject);
-            manager.OnPurchased();
         }
         else { Debug.Log("POOR"); }
     }

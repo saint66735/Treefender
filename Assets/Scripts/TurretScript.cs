@@ -23,7 +23,7 @@ public class TurretScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        FindObjectOfType<TurretManager>().AddTurret(gameObject.GetComponent<TurretScript>());
     }
 
     // Update is called once per frame

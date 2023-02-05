@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    [SerializeField]
-    float health = 100f;
+    public float health = 100f;
     // Start is called before the first frame update
     void Start()
     {

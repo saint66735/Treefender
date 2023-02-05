@@ -41,6 +41,7 @@ public class WaveManager : MonoBehaviour
         combat = true;
         button.SetActive(false);
         enemyStats *= 1.05f;
+        FindAnyObjectByType<UIManager>().UpdateWave(waveNumber);
         buttonAppears = Time.time + buttonDelay;
     }
     public void DecreaseEnemyCount()

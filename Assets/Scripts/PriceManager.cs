@@ -5,29 +5,35 @@ using UnityEngine;
 public class PriceManager : MonoBehaviour
 {
     public int TurretPrice = 10;
-    static float scaling = 1.5f;
+    public int upgradePrice = 10;
+    float scaling = 1.5f;
     // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+    
     public void IncreaseTurretCost()
     {
         TurretPrice = (int)(scaling * TurretPrice);
+        //Debug.Log(TurretPrice);
+    }
+    public void IncreaseUpgradeCost()
+    {
+        upgradePrice = (int)(scaling * upgradePrice);
     }
     public bool CheckIfAffordableTurret()
     {
-        if (Currency.GetCurrency() > TurretPrice) { return true; }
+        if (Currency.GetCurrency() >= TurretPrice) { return true; }
         else { return false; }
     }
-    public void OnPurchased() 
+    public bool CheckIfAffordableUpgrade()
+    {
+        if (Currency.GetCurrency() >= upgradePrice) { return true; }
+        else { return false; }
+    }
+    public void OnPurchasedTurret() 
     {
         Currency.RemoveCurrency(TurretPrice);
+    }
+    public void OnPurchasedUpgrade()
+    {
+        Currency.RemoveCurrency(upgradePrice);
     }
 }

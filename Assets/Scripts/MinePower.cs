@@ -6,7 +6,7 @@ public class MinePower : MonoBehaviour
 {
     [SerializeField] private int baseMinePower;
     private static int maxMinePower;
-    private static int currentMinePower;
+    public static int currentMinePower;
 
     public static void ResetMinePower()
     {
